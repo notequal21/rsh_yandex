@@ -71,6 +71,10 @@ const Final = ({ refItem, styleProps }: IFinal) => {
     'startTime',
     ''
   );
+  const [answersStorage, setAnswersStorage]: any = useLocalStorage(
+    'answers',
+    []
+  );
   const [showWarn, setShowWarn] = useState(false);
   const [sendErr, setSendErr] = useState('');
   const [sendAwait, setSendAwait] = useState(false);
@@ -79,12 +83,14 @@ const Final = ({ refItem, styleProps }: IFinal) => {
     if (sharedLink.length > 0) {
       setSendAwait(true);
 
+      console.log(answersStore, answersStorage);
+
       axios
         .post(window.yarshEndPoint, {
           email: data.email,
           start: startTimeStorage ? startTimeStorage : startTime,
           finish: dateString(),
-          answers: answersStore,
+          answers: answersStore.length > 0 ? answersStore : answersStorage,
           result: calculatedValue,
           socials: sharedLink,
         })
@@ -151,7 +157,7 @@ const Final = ({ refItem, styleProps }: IFinal) => {
         const currentResult: any = finalResults.filter(
           (item) => item.value === calculatedValue
         )[0];
-
+        setAnswersStorage(answersStore);
         setCurrentResultStorage(currentResult);
         setIsFinalWasOpened(true);
         setStartTimeStorage(startTime);
