@@ -75,6 +75,7 @@ const Final = ({ refItem, styleProps }: IFinal) => {
     'answers',
     []
   );
+  const [finalResultId, setFinalResultId]: any = useLocalStorage('answers', []);
   const [showWarn, setShowWarn] = useState(false);
   const [sendErr, setSendErr] = useState('');
   const [sendAwait, setSendAwait] = useState(false);
@@ -157,6 +158,7 @@ const Final = ({ refItem, styleProps }: IFinal) => {
         const currentResult: any = finalResults.filter(
           (item) => item.value === calculatedValue
         )[0];
+
         setAnswersStorage(answersStore);
         setCurrentResultStorage(currentResult);
         setIsFinalWasOpened(true);
@@ -279,7 +281,9 @@ const Final = ({ refItem, styleProps }: IFinal) => {
                 <a
                   rel='noreferrer'
                   target='_blank'
-                  href={item.link}
+                  href={`${item.link}&n=${
+                    currentResultStorage && currentResultStorage.id
+                  }`}
                   key={index}
                   className={`${style.finalShare__socialsItem} ${
                     sharedLink.some((link: any) => link === item.sn) &&
