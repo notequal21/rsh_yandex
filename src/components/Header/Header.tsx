@@ -15,14 +15,26 @@ const Header = ({ isFinalScreen }: IHeader) => {
     <header className={style.header}>
       <div className='container'>
         <div className={style.headerBody}>
-          <div
+          <a
+            target='_blank'
+            rel='noreferrer'
+            href='https://redirect.appmetrica.yandex.com/serve/604797553023702938'
             className={`${style.headerBody__logo} ${
               isFinalScreen && 'isFinal'
             }`}
+            onClick={() => window.yarshGoal('logo_yandex')}
           >
             {isMobile ? LogoYandexMobile : YandexLogo}
-          </div>
-          <div className={style.headerBody__logo}>{RisfinestLogo}</div>
+          </a>
+          <a
+            target='_blank'
+            rel='noreferrer'
+            href='https://rosfines.ru/?utm_source=Zapravki_landing&utm_medium=logo&utm_campaign=yandex_zapravki'
+            className={style.headerBody__logo}
+            onClick={() => window.yarshGoal('logo_rs')}
+          >
+            {RisfinestLogo}
+          </a>
         </div>
       </div>
     </header>

@@ -80,7 +80,7 @@ const Final = ({ refItem, styleProps }: IFinal) => {
       setSendAwait(true);
 
       axios
-        .post('https://yarsh.srv08.ru/api/', {
+        .post(window.yarshEndPoint, {
           email: data.email,
           start: startTimeStorage ? startTimeStorage : startTime,
           finish: dateString(),
@@ -98,9 +98,12 @@ const Final = ({ refItem, styleProps }: IFinal) => {
           setSharedLinksStorage([]);
           setStartTimeStorage('');
           setSendErr('');
+          window.yarshGoal('finish');
         })
         .catch(function (error) {
-          setSendErr(error.message);
+          error.response.data.error
+            ? setSendErr(error.response.data.error)
+            : setSendErr(error.message);
         })
         .finally(() => {
           setSendAwait(false);
@@ -186,6 +189,7 @@ const Final = ({ refItem, styleProps }: IFinal) => {
   }, []);
 
   const setShared = (id: string) => {
+    window.yarshGoal('share', id);
     setTimeout(() => {
       setSharedLink([...sharedLink, id]);
       setSharedLinksStorage([...sharedLink, id]);

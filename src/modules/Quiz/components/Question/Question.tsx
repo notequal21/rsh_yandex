@@ -46,6 +46,8 @@ const Question = ({
     dispatch(setAnswerById({ id: questionId, value }));
     dispatch(setAnswerByIdBtn({ id: questionId, value: btnID }));
 
+    window.yarshGoal('answer', questionId, btnID);
+
     gsap.to(nodeRef.current, {
       opacity: 1,
       x: '-150%',

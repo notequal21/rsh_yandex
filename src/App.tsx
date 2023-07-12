@@ -29,6 +29,13 @@ const transitionStyles: any = {
   exited: { opacity: 0, transform: 'translate(-105%, 0)' },
 };
 
+declare global {
+  interface Window {
+    yarshEndPoint: any;
+    yarshGoal: any;
+  }
+}
+
 function App() {
   const nodeRef = useRef(null);
   const [isMainScreen, setMainScreen] = useState(true);
@@ -41,6 +48,7 @@ function App() {
       setMainScreen(true);
     } else {
       setMainScreen(false);
+      window.yarshGoal('start');
 
       dispatch(setStartTime(dateString()));
     }
@@ -52,6 +60,7 @@ function App() {
   };
 
   useEffect(() => {
+    // window.yarshEndPoint();
     if (isFinalWasOpened) {
       handleFinalScreen();
     }

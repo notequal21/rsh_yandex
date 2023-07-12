@@ -79,19 +79,8 @@ const Main = ({ isActive, isOut, handler, refItem, styleProps }: IMain) => {
       </div>
       <div className={style.mainBody__img}>
         <div className={style.mainBody__imgBg} ref={bgRef}>
-          {isDesktop && (
-            // <img src={bgImg} srcSet={`${bgImg} 1x, ${bgImg2x} 2x`} alt='' />
-            <img src={bgImg} alt='' />
-          )}
-          {isTablet && (
-            // <img src={bgImg} srcSet={`${bgImg} 1x, ${bgImg2x} 2x`} alt='' />
-            <img src={bgImg} alt='' />
-            // <img
-            //   src={bgTabletImg}
-            //   srcSet={`${bgTabletImg} 1x, ${bgTabletImg2x} 2x`}
-            //   alt=''
-            // />
-          )}
+          {isDesktop && <img src={bgImg} alt='' />}
+          {isTablet && <img src={bgImg} alt='' />}
           {isMobile && (
             <img
               src={bgMobileImg}
