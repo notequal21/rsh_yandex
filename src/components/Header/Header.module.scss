@@ -1,0 +1,41 @@
+.header {
+  position: absolute;
+  z-index: 10;
+  top: 2rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 100%;
+
+  @media (max-width: 720px) {
+    top: 1.143rem;
+  }
+
+  &Body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__logo {
+      svg {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      &:nth-child(1) {
+        width: 16.286rem;
+
+        @media (max-width: 720px) {
+          width: 11.714rem;
+        }
+      }
+      &:nth-child(2) {
+        width: 11.857rem;
+
+        @media (max-width: 720px) {
+          width: 11.143rem;
+        }
+      }
+    }
+  }
+}
