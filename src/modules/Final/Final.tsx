@@ -281,7 +281,7 @@ const Final = ({ refItem, styleProps }: IFinal) => {
                 <a
                   rel='noreferrer'
                   target='_blank'
-                  href={`${item.link}&n=${
+                  href={`${item.link}_${
                     currentResultStorage && currentResultStorage.id
                   }`}
                   key={index}
