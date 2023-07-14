@@ -60,7 +60,9 @@ function App() {
   };
 
   useEffect(() => {
-    // window.yarshEndPoint();
+    window.yarshGoal = function (name: any, param1 = '', param2 = '') {
+      console.log(name, param1, param2);
+    };
     if (isFinalWasOpened) {
       handleFinalScreen();
     }
