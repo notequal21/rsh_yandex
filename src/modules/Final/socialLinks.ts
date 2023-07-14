@@ -11,7 +11,11 @@ const socialLinks = [
     icon: vkSsvg,
     sn: 'VK',
   },
-  { link: `tg://share?url=${currentUrl}?sn=TG`, icon: tgSvg, sn: 'TG' },
+  {
+    link: `https://t.me/share/url?url=${currentUrl}?sn=TG`,
+    icon: tgSvg,
+    sn: 'TG',
+  },
   { link: `https://wa.me/?text=${currentUrl}?sn=WA`, icon: wuSvg, sn: 'WA' },
   {
     link: `https://connect.ok.ru/offer?url=${currentUrl}?sn=OK`,

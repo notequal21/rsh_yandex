@@ -18,7 +18,11 @@ const Header = ({ isFinalScreen }: IHeader) => {
           <a
             target='_blank'
             rel='noreferrer'
-            href='https://redirect.appmetrica.yandex.com/serve/604797553023702938'
+            href={`${
+              isMobile
+                ? 'https://redirect.appmetrica.yandex.com/serve/604797553023702938'
+                : 'https://zapravki.yandex.ru/?utm_source=rosfines&utm_medium=partner'
+            }`}
             className={`${style.headerBody__logo} ${
               isFinalScreen && 'isFinal'
             }`}

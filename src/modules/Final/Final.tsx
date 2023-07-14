@@ -327,9 +327,24 @@ const Final = ({ refItem, styleProps }: IFinal) => {
               />
               <span>{checkSvg}</span>
               <p>
-                Соглашаюсь с <a href=''>правилами акции</a> и даю согласие
-                на обработку персональных данных. Подробнее об обработке данных
-                здесь.
+                Соглашаюсь с{' '}
+                <a
+                  href='/rules/'
+                  target='_blank'
+                  onClick={() => window.yarshGoal('rules')}
+                >
+                  правилами акции
+                </a>{' '}
+                и даю согласие на обработку персональных данных. Подробнее
+                об обработке данных{' '}
+                <a
+                  target='_blank'
+                  rel='noreferrer'
+                  href='https://rosfines.ru/politics_personal_data'
+                >
+                  здесь
+                </a>
+                .
               </p>
             </label>
           </div>
