@@ -315,7 +315,7 @@ const Final = ({ refItem, styleProps }: IFinal) => {
                   pattern: emailRegex,
                 })}
                 type='text'
-                placeholder='Введите Email'
+                placeholder='Введите email'
               />
             </label>
           </div>
