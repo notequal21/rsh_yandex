@@ -131,6 +131,9 @@
 
         &:hover {
           background: #42ff98;
+          @media (max-width: 720px) {
+            background: #fff;
+          }
         }
         &:active {
           background: #000;
