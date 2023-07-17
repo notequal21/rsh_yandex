@@ -80,6 +80,15 @@ const Final = ({ refItem, styleProps }: IFinal) => {
   const [sendErr, setSendErr] = useState('');
   const [sendAwait, setSendAwait] = useState(false);
 
+  const IsJsonString = (str: string) => {
+    try {
+      JSON.parse(str);
+    } catch (e) {
+      return false;
+    }
+    return true;
+  };
+
   const onSubmit = (data: any) => {
     if (sharedLink.length > 0) {
       setSendAwait(true);
@@ -96,16 +105,23 @@ const Final = ({ refItem, styleProps }: IFinal) => {
           socials: sharedLink,
         })
         .then(function (response) {
-          console.log(response);
-          setIsFormSended(true);
-          dispatch(setFinishTime(dateString()));
+          // console.log(response);
+          // const isJson = IsJsonString(response.data);
+          const isOk = response.data.result;
 
-          setIsFinalWasOpened(false);
-          setCurrentResultStorage({});
-          setSharedLinksStorage([]);
-          setStartTimeStorage('');
-          setSendErr('');
-          window.yarshGoal('finish');
+          if (isOk) {
+            setIsFormSended(true);
+            dispatch(setFinishTime(dateString()));
+
+            setIsFinalWasOpened(false);
+            setCurrentResultStorage({});
+            setSharedLinksStorage([]);
+            setStartTimeStorage('');
+            setSendErr('');
+            window.yarshGoal('finish');
+          } else {
+            setSendErr('Системная ошибка');
+          }
         })
         .catch(function (error) {
           error.response.data.error
@@ -302,7 +318,7 @@ const Final = ({ refItem, styleProps }: IFinal) => {
           </div>
           <div className={style.finalEmail}>
             <div className={style.finalEmail__title}>
-              2. Оставьте свой контактный Email:
+              2. Оставьте свой контактный email:
             </div>
             <label
               className={`${style.finalEmail__input} ${
