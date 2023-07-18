@@ -1,7 +1,7 @@
 export const finalResults = [
   {
     id: 1,
-    value: 1,
+    value: 2.0,
     bg: ['result-image-01.jpg', 'mobile/result-image-01-mob.jpg'],
     text: ['1 час', 'сходить в чебуречную'],
   },

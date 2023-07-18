@@ -11,7 +11,7 @@ import {
   setCalculatedValue,
   setStartTime,
 } from './store/answersSlice';
-import { useReadLocalStorage } from 'usehooks-ts';
+import { useLocalStorage, useReadLocalStorage } from 'usehooks-ts';
 import { dateString } from './helpers/dateString';
 
 const duration = 500;
@@ -42,6 +42,22 @@ function App() {
   const [isFinalScreen, setFinalScreen] = useState(false);
   const isFinalWasOpened = useReadLocalStorage('isFinalPageOpened');
   const dispatch = useAppDispatch();
+  const [currentResultStorage, setCurrentResultStorage]: any = useLocalStorage(
+    'currentResult',
+    {}
+  );
+  const [sharedLinksStorage, setSharedLinksStorage]: any = useLocalStorage(
+    'sharedLinks',
+    []
+  );
+  const [startTimeStorage, setStartTimeStorage]: any = useLocalStorage(
+    'startTime',
+    ''
+  );
+  const [answersStorage, setAnswersStorage]: any = useLocalStorage(
+    'answers',
+    []
+  );
 
   const handleMainScree = (type?: string) => {
     if (type === 'back') {
@@ -60,6 +76,10 @@ function App() {
   };
 
   useEffect(() => {
+    setCurrentResultStorage({});
+    setSharedLinksStorage([]);
+    setStartTimeStorage({});
+    setAnswersStorage({});
     if (isFinalWasOpened) {
       handleFinalScreen();
     }

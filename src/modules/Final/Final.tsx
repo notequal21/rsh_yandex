@@ -79,6 +79,7 @@ const Final = ({ refItem, styleProps }: IFinal) => {
   const [showWarn, setShowWarn] = useState(false);
   const [sendErr, setSendErr] = useState('');
   const [sendAwait, setSendAwait] = useState(false);
+  const [isFormWasDecline, setIsFormWasDecline] = useState(false);
 
   const IsJsonString = (str: string) => {
     try {
@@ -130,6 +131,12 @@ const Final = ({ refItem, styleProps }: IFinal) => {
         })
         .finally(() => {
           setSendAwait(false);
+          setIsFormWasDecline(true);
+          setIsFinalWasOpened(false);
+          // setCurrentResultStorage({});
+          // setSharedLinksStorage([]);
+          // setStartTimeStorage('');
+          // setSendErr('');
         });
     } else {
       setShowWarn(true);
@@ -142,7 +149,13 @@ const Final = ({ refItem, styleProps }: IFinal) => {
     const p = resultArr[2];
     const q = resultArr[3];
 
-    dispatch(setCalculatedValue(((n - v - p) * q * 2) / 10));
+    const value = ((n - v - p) * q * 2) / 10;
+
+    if (value === 2) {
+      dispatch(setCalculatedValue(2.4));
+    } else {
+      dispatch(setCalculatedValue(((n - v - p) * q * 2) / 10));
+    }
   };
 
   useEffect(() => {
@@ -157,7 +170,7 @@ const Final = ({ refItem, styleProps }: IFinal) => {
   }, [watch]);
 
   useEffect(() => {
-    if (!isFormSended) {
+    if (!isFormSended && !isFormWasDecline) {
       if (isFinalWasOpened) {
         setSharedLink(sharedLinksStorage);
         setBgLink(
@@ -220,10 +233,6 @@ const Final = ({ refItem, styleProps }: IFinal) => {
       !isSocialShared && setIsSocialShared(true);
     }, 2000);
   };
-
-  useEffect(() => {
-    console.log(errors.agree);
-  });
 
   return (
     <section ref={refItem} style={styleProps} className={style.final}>
