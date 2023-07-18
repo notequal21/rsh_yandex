@@ -93,7 +93,7 @@ const Final = ({ refItem, styleProps }: IFinal) => {
     if (sharedLink.length > 0) {
       setSendAwait(true);
 
-      console.log(answersStore, answersStorage);
+      // console.log(answersStore, answersStorage);
 
       axios
         .post(window.yarshEndPoint, {
@@ -220,6 +220,10 @@ const Final = ({ refItem, styleProps }: IFinal) => {
       !isSocialShared && setIsSocialShared(true);
     }, 2000);
   };
+
+  useEffect(() => {
+    console.log(errors.agree);
+  });
 
   return (
     <section ref={refItem} style={styleProps} className={style.final}>
@@ -376,6 +380,12 @@ const Final = ({ refItem, styleProps }: IFinal) => {
               {isMobile
                 ? 'Пожалуйста, поделитесь результатом в соцсетях'
                 : 'Пожалуйста, сначала поделитесь результатом в соцсетях'}
+            </div>
+          )}
+
+          {errors.agree && (
+            <div className={style.final__warn}>
+              {warnSvg} Необходимо согласие
             </div>
           )}
 
