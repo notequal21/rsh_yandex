@@ -76,12 +76,13 @@ function App() {
   };
 
   useEffect(() => {
-    setCurrentResultStorage({});
-    setSharedLinksStorage([]);
-    setStartTimeStorage({});
-    setAnswersStorage({});
     if (isFinalWasOpened) {
       handleFinalScreen();
+    } else {
+      setCurrentResultStorage({});
+      setSharedLinksStorage([]);
+      setStartTimeStorage({});
+      setAnswersStorage({});
     }
   }, []);
 
