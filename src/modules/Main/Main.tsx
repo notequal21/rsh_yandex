@@ -103,7 +103,7 @@ const Main = ({ isActive, isOut, handler, refItem, styleProps }: IMain) => {
             </h2>
             <ul ref={listRef}>
               <li>60 000 руб. на заправку</li>
-              <li>или один из 50 сертификатов на бензин на сумму 4 000 руб.</li>
+              <li>или один из 50 сертификатов топливо на сумму 4 000 руб.</li>
             </ul>
             <Button onClick={handler} refItem={btnRef} title='Участвовать' />
           </div>
