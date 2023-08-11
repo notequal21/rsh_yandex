@@ -221,6 +221,15 @@
       border-radius: 1.714rem;
     }
 
+    &.isFinishedContent {
+      .successModal {
+        @media (max-width: 720px) {
+          position: relative;
+          padding: 0;
+        }
+      }
+    }
+
     &__title {
       color: #000;
       font-family: YS Text;
@@ -286,6 +295,27 @@
         font-style: normal;
         font-weight: 500;
         line-height: 2rem;
+      }
+      &__text {
+        margin: 1.429rem 0 0;
+
+        color: #000;
+        font-family: YS Text;
+        font-size: 1.714rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 2rem;
+
+        p {
+          &:not(:first-child) {
+            margin: 1.429rem 0 0;
+          }
+
+          a {
+            color: #000;
+            text-decoration-line: underline;
+          }
+        }
       }
     }
   }

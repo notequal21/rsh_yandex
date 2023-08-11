@@ -80,6 +80,7 @@ const Final = ({ refItem, styleProps }: IFinal) => {
   const [sendErr, setSendErr] = useState('');
   const [sendAwait, setSendAwait] = useState(false);
   const [isFormWasDecline, setIsFormWasDecline] = useState(false);
+  const [isFinished, setIsFinished] = useState(window.actionFinished);
 
   const IsJsonString = (str: string) => {
     try {
@@ -285,132 +286,182 @@ const Final = ({ refItem, styleProps }: IFinal) => {
             <span></span>
           </div>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)} className={style.finalForm}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className={`${style.finalForm} ${
+            isFinished && style.isFinishedContent
+          }`}
+        >
           <div
-            className={`${style.successModal}  ${isFormSended && style.sended}`}
+            className={`${style.successModal}  ${isFinished && style.sended}`}
           >
             <div className={style.successModal__check}>
               <img src={checkSvgIcon} alt='' />
             </div>
-            <div className={style.successModal__title}>Спасибо!</div>
-            <div className={style.successModal__subtitle}>
-              Теперь вы участвуете <br /> в розыгрыше!
-            </div>
-          </div>
-
-          <div className={style.finalForm__title}>
-            Выиграйте запас топлива от Яндекс Заправок!
-          </div>
-          <div className={style.finalShare}>
-            <div className={style.finalShare__title}>
-              1. Поделитесь результатом с друзьями:
-            </div>
-            <div className={style.finalShare__socials}>
-              {socialLinks.map((item: any, index: any) => (
-                <a
-                  rel='noreferrer'
-                  target='_blank'
-                  href={`${item.link}_${
-                    currentResultStorage && currentResultStorage.id
-                  }`}
-                  key={index}
-                  className={`${style.finalShare__socialsItem} ${
-                    sharedLink.some((link: any) => link === item.sn) &&
-                    style.shared
-                  }`}
-                  onClick={() => setShared(item.sn)}
-                >
-                  {item.icon}
-
-                  <span>
-                    <img src={checkLink} alt='' />
-                  </span>
-                </a>
-              ))}
-            </div>
-          </div>
-          <div className={style.finalEmail}>
-            <div className={style.finalEmail__title}>
-              2. Оставьте свой контактный email:
-            </div>
-            <label
-              className={`${style.finalEmail__input} ${
-                errors.email && style.err
-              } ${successEmail && style.success}`}
-            >
-              <input
-                {...register('email', {
-                  required: true,
-                  pattern: emailRegex,
-                })}
-                type='text'
-                placeholder='Введите email'
-              />
-            </label>
-          </div>
-          <div className={`${style.finalCheck} ${errors.agree && style.err}`}>
-            <label>
-              <input
-                {...register('agree', { required: true })}
-                type='checkbox'
-              />
-              <span>{checkSvg}</span>
+            <div className={style.successModal__title}>Акция завершена!</div>
+            <div className={style.successModal__text}>
               <p>
-                Соглашаюсь с{' '}
+                Об итогах можно узнать в 
                 <a
-                  href='/rules/'
+                  href='https://vk.com/rosfines'
+                  rel='noreferrer'
                   target='_blank'
-                  onClick={() => window.yarshGoal('rules')}
                 >
-                  правилами акции
+                  группе РосШтрафы
                 </a>{' '}
-                и даю согласие на обработку персональных данных. Подробнее
-                об обработке данных{' '}
+                во Вконтакте.
+              </p>
+              <p>
+                Скачайте{' '}
                 <a
                   target='_blank'
                   rel='noreferrer'
-                  href='https://rosfines.ru/politics_personal_data'
+                  href={`${
+                    isMobile
+                      ? 'https://redirect.appmetrica.yandex.com/serve/604797553023702938'
+                      : 'https://zapravki.yandex.ru/?utm_source=rosfines&utm_medium=partner'
+                  }`}
                 >
-                  здесь
-                </a>
-                .
+                  Яндекс Заправки
+                </a>{' '}
+                и начните экономить время.
               </p>
-            </label>
-          </div>
-          <div className={style.finalAgree}>
-            <p>
-              Нажимая на кнопку, я соглашаюсь на получение рекламной рассылки.
-            </p>
+            </div>
           </div>
 
-          {sharedLink.length === 0 && showWarn && (
-            <div className={style.final__warn}>
-              {warnSvg}
-              {isMobile
-                ? 'Пожалуйста, поделитесь результатом в соцсетях'
-                : 'Пожалуйста, сначала поделитесь результатом в соцсетях'}
-            </div>
-          )}
+          {!isFinished && isMobile && (
+            <>
+              <div
+                className={`${style.successModal} ${
+                  style.successModal_finished
+                } ${isFormSended && style.sended}`}
+              >
+                <div className={style.successModal__check}>
+                  <img src={checkSvgIcon} alt='' />
+                </div>
+                <div className={style.successModal__title}>Спасибо!</div>
+                <div className={style.successModal__subtitle}>
+                  Теперь вы участвуете <br /> в розыгрыше!
+                </div>
+              </div>
+              <div className={style.finalForm__title}>
+                Выиграйте запас топлива от Яндекс Заправок!
+              </div>
+              <div className={style.finalShare}>
+                <div className={style.finalShare__title}>
+                  1. Поделитесь результатом с друзьями:
+                </div>
+                <div className={style.finalShare__socials}>
+                  {socialLinks.map((item: any, index: any) => (
+                    <a
+                      rel='noreferrer'
+                      target='_blank'
+                      href={`${item.link}_${
+                        currentResultStorage && currentResultStorage.id
+                      }`}
+                      key={index}
+                      className={`${style.finalShare__socialsItem} ${
+                        sharedLink.some((link: any) => link === item.sn) &&
+                        style.shared
+                      }`}
+                      onClick={() => setShared(item.sn)}
+                    >
+                      {item.icon}
 
-          {errors.agree && (
-            <div className={style.final__warn}>
-              {warnSvg} Необходимо согласие
-            </div>
-          )}
+                      <span>
+                        <img src={checkLink} alt='' />
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+              <div className={style.finalEmail}>
+                <div className={style.finalEmail__title}>
+                  2. Оставьте свой контактный email:
+                </div>
+                <label
+                  className={`${style.finalEmail__input} ${
+                    errors.email && style.err
+                  } ${successEmail && style.success}`}
+                >
+                  <input
+                    {...register('email', {
+                      required: true,
+                      pattern: emailRegex,
+                    })}
+                    type='text'
+                    placeholder='Введите email'
+                  />
+                </label>
+              </div>
+              <div
+                className={`${style.finalCheck} ${errors.agree && style.err}`}
+              >
+                <label>
+                  <input
+                    {...register('agree', { required: true })}
+                    type='checkbox'
+                  />
+                  <span>{checkSvg}</span>
+                  <p>
+                    Соглашаюсь с{' '}
+                    <a
+                      href='/rules/'
+                      target='_blank'
+                      onClick={() => window.yarshGoal('rules')}
+                    >
+                      правилами акции
+                    </a>{' '}
+                    и даю согласие на обработку персональных данных. Подробнее
+                    об обработке данных{' '}
+                    <a
+                      target='_blank'
+                      rel='noreferrer'
+                      href='https://rosfines.ru/politics_personal_data'
+                    >
+                      здесь
+                    </a>
+                    .
+                  </p>
+                </label>
+              </div>
+              <div className={style.finalAgree}>
+                <p>
+                  Нажимая на кнопку, я соглашаюсь на получение рекламной
+                  рассылки.
+                </p>
+              </div>
 
-          {sendErr.length > 0 && (
-            <div className={style.final__warn}>
-              {warnSvg}
-              {sendErr}
-            </div>
-          )}
+              {sharedLink.length === 0 && showWarn && (
+                <div className={style.final__warn}>
+                  {warnSvg}
+                  {isMobile
+                    ? 'Пожалуйста, поделитесь результатом в соцсетях'
+                    : 'Пожалуйста, сначала поделитесь результатом в соцсетях'}
+                </div>
+              )}
 
-          <Button
-            loading={sendAwait}
-            type={'submit'}
-            className={style.final__button}
-            title='Участвовать'
-          />
+              {errors.agree && (
+                <div className={style.final__warn}>
+                  {warnSvg} Необходимо согласие
+                </div>
+              )}
+
+              {sendErr.length > 0 && (
+                <div className={style.final__warn}>
+                  {warnSvg}
+                  {sendErr}
+                </div>
+              )}
+
+              <Button
+                loading={sendAwait}
+                type={'submit'}
+                className={style.final__button}
+                title='Участвовать'
+              />
+            </>
+          )}
         </form>
       </div>
     </section>

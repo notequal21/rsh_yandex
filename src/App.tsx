@@ -33,6 +33,7 @@ declare global {
   interface Window {
     yarshEndPoint: any;
     yarshGoal: any;
+    actionFinished: any;
   }
 }
 
