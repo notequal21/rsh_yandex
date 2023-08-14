@@ -329,7 +329,7 @@ const Final = ({ refItem, styleProps }: IFinal) => {
             </div>
           </div>
 
-          {!isFinished && isMobile && (
+          {!isFinished && (
             <>
               <div
                 className={`${style.successModal} ${
